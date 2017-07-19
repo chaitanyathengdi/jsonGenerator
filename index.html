@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="lib/angular.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="lib/bootstrap.min.css">
+  <script src="script.js"></script>
+  <script src="lib/fileSaver.js"></script>
+  <script src="lib/jquery.js"></script>
+  <script src="lib/bootstrap.min.js"></script>
+</head>
+
+<body ng-app="jsonGenerator" ng-controller="myController as controller">
+  <div ng-controller="myController as controller" class="container">
+    <h1>{{controller.generatedJson.title}}</h1>
+    <div ng-repeat="(key, value) in controller.generatedJson">
+      <div class="row">
+        <div class="col-md-2">
+          <label>{{ key }}</label> :
+        </div>
+        <div class="col-md-10">
+          <textarea rows="2" ng-model="controller.generatedJson[key]"></textarea>
+        </div>
+      </div>
+    </div>
+    <button ng-click="controller.saveFile('generated.json')">Save JSON</button>
+    <hr>
+    <h4>Add new row</h4>
+    <form ng-submit="controller.addKey(controller.key, controller.value)">
+      <input ng-model="controller.key" placeholder="Key">
+      <input ng-model="controller.value" placeholder="Value">
+      <button type="submit">Add Row</button>
+    </form>
+  </div>
+
+</body>
+
+</html>
