@@ -1,6 +1,6 @@
 (function(){
 angular.module('jsonGenerator', [])
-.controller('myController', function($filter){
+.controller('myController', function($filter, fileService){
 
     var vm = this;
     
@@ -8,7 +8,8 @@ angular.module('jsonGenerator', [])
         title: "Sample title"
     };
     vm.addKey = addKey;
-    vm.saveFile = saveFile;
+    vm.saveFile = fileService.saveFile;
+    vm.loadFile = loadFile;
 
     function addKey(key, value) {
         vm.generatedJson[key] = value;
@@ -16,7 +17,27 @@ angular.module('jsonGenerator', [])
         vm.value=null;
     }
 
-    function saveFile(name) {
+    function loadFile() {
+        var name = "file";
+        file = prompt("Enter name of file: ", name);
+        fileService.loadFile(name)
+            .then(function(data) {
+                vm.generatedJson = data;
+            }, function() {});
+    }
+})
+.service('fileService', function($http){
+    this.loadFile = function(name){
+        if(name.slice(-5) !== ".json") {
+            name = name + ".json";
+        }
+        return $http.get(name)
+            .then(function(response) {
+                return response.data;
+            }, function() {});
+    }
+
+    this.saveFile = function(name) {
         var fileName = name;
         fileName = prompt("Enter file name:", fileName);
         if(!!fileName) {
