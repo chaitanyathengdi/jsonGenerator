@@ -20,10 +20,12 @@ angular.module('jsonGenerator', [])
     function loadFile() {
         var name = "file";
         name = prompt("Enter name of file: ", name);
-        fileService.loadFile(name)
-            .then(function(data) {
-                vm.generatedJson = data;
-            }, function() {});
+        if(!!name) {
+            fileService.loadFile(name)
+                .then(function(data) {
+                    vm.generatedJson = data;
+                }, function() {});
+        }
     }
 })
 .service('fileService', function($http, $filter){
@@ -40,10 +42,10 @@ angular.module('jsonGenerator', [])
     this.saveFile = function(name, input) {
         var fileName = name;
         fileName = prompt("Enter file name:", fileName);
-        if(fileName.slice(-5) !== ".json") {
-            fileName = fileName + ".json";
-        }
         if(!!fileName) {
+            if(fileName.slice(-5) !== ".json") {
+                fileName = fileName + ".json";
+            }
             var file = new File([$filter('json')(input, 4)], fileName, {type: "application/json;charset=utf-8"});
             saveAs(file);
         }
