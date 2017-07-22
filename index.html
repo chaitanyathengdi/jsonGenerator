@@ -13,13 +13,13 @@
 
 <body ng-app="jsonGenerator" ng-controller="myController as controller">
   <div ng-controller="myController as controller" class="container">
-    <h1>{{controller.generatedJson.title}}</h1>
+    <h1 class="text-center">{{controller.generatedJson.Title}}</h1>
     <div ng-repeat="(key, value) in controller.generatedJson">
       <div class="row">
-        <div class="col-sm-2">
-          <label>{{ key }}</label> :
+        <div class="col-sm-4">
+          <label>{{ key }}:</label>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
           <textarea rows="2" ng-model="controller.generatedJson[key]"></textarea>
         </div>
       </div>
@@ -34,6 +34,8 @@
       <input ng-model="controller.value" placeholder="Value">
       <button type="submit">Add Row</button>
     </form>
+    <input type="checkbox" ng-model="showJson"> Show JSON
+    <pre ng-show="showJson">{{ controller.generatedJson | json }}</pre>
   </div>
 
 </body>
