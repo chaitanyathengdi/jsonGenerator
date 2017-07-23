@@ -11,7 +11,7 @@
   <script src="lib/bootstrap.min.js"></script>
 </head>
 
-<body ng-app="jsonGenerator" ng-controller="myController as controller">
+<body ng-app="jsonGenerator">
   <div ng-controller="myController as controller" class="container">
     <h1 class="text-center">{{controller.generatedJson.Title}}</h1>
     <div ng-repeat="(key, value) in controller.generatedJson">
