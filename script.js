@@ -5,26 +5,35 @@ angular.module('jsonGenerator', [])
     var vm = this;
     
     vm.generatedJson = {
-        Title: "Sample title"
+        title: "Sample title",
+        rows: []
     };
     vm.addKey = addKey;
     vm.saveFile = function(name){ fileService.saveFile(name, vm.generatedJson); };
     vm.loadFile = loadFile;
     vm.checkValue = checkValue;
     vm.resetJson = resetJson;
+    vm.editTitle = editTitle;
 
     function addKey(key, value) {
-        vm.generatedJson[key] = value;
+        vm.generatedJson.rows.push({
+            key: key,
+            value: value
+        });
         vm.key=null;
         vm.value=null;
     }
     
     function checkValue(key) {
-        if(!!key) {
-            if(!!vm.generatedJson[key]) {
-                vm.value = vm.generatedJson[key];
-            }
+        if(!!vm.generatedJson) {
+            var returnedArray = vm.generatedJson.rows.filter(function(element) { return element.key === key; });
+            if(returnedArray.length) vm.value = returnedArray[0].value;
         }
+    }
+    
+    function editTitle() {
+        var title = prompt("Enter title: ", vm.generatedJson.title);
+        if(!!title) vm.generatedJson.title = title;
     }
 
     function loadFile() {
@@ -40,7 +49,8 @@ angular.module('jsonGenerator', [])
     
     function resetJson() {
         vm.generatedJson = {
-            Title: "Sample title"
+            title: "Sample title",
+            rows: []
         };
     }
 })

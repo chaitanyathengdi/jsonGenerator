@@ -13,14 +13,14 @@
 
 <body ng-app="jsonGenerator">
   <div ng-controller="myController as controller" class="container">
-    <h1 class="text-center">{{controller.generatedJson.Title}}</h1>
-    <div ng-repeat="(key, value) in controller.generatedJson">
+    <h1 class="text-center" ng-dblclick="controller.editTitle()" title="Double-click to edit this title.">{{controller.generatedJson.title}}</h1>
+    <div ng-repeat="row in controller.generatedJson.rows">
       <div class="row">
         <div class="col-sm-4">
-          <label>{{ key }}:</label>
+          <label>{{ row.key }}:</label>
         </div>
         <div class="col-sm-8">
-          <textarea rows="2" ng-model="controller.generatedJson[key]"></textarea>
+          <textarea rows="2" ng-model="row.value"></textarea>
         </div>
       </div>
     </div>
