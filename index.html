@@ -17,7 +17,7 @@
     <div ng-repeat="row in controller.generatedJson.rows">
       <div class="row">
         <div class="col-sm-4">
-          <label>{{ row.key }}:</label>
+          <textarea rows="2" ng-model="row.key" class="text-bold"></textarea>
         </div>
         <div class="col-sm-8">
           <textarea rows="2" ng-model="row.value"></textarea>

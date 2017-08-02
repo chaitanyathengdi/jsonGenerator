@@ -10,3 +10,7 @@ body>div {
 
     padding: 20px 40px;
 }
+
+.text-bold {
+    font-weight: bold;
+}
