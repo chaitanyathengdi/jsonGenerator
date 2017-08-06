@@ -17,10 +17,10 @@
     <div ng-repeat="row in controller.generatedJson.rows">
       <div class="row">
         <div class="col-sm-4">
-          <textarea rows="2" ng-model="row.key" class="text-bold"></textarea>
+          <textarea ng-model="row.key" class="text-bold" auto-resize></textarea>
         </div>
         <div class="col-sm-8">
-          <textarea rows="2" ng-model="row.value"></textarea>
+          <textarea ng-model="row.value" auto-resize></textarea>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
     <input type="checkbox" ng-model="showJson"> Show JSON
     <pre ng-show="showJson">{{ controller.generatedJson | json }}</pre>
   </div>
-
+  <script src="directives/textarea-resizer.js"></script>
 </body>
 
 </html>
