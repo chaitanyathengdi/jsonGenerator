@@ -8,9 +8,10 @@ angular.module('jsonGenerator', [])
         title: "Sample title",
         rows: []
     };
+    vm.fileName = null;
     vm.selectedRowIndex = null;
     vm.addKey = addKey;
-    vm.saveFile = function(name){ fileService.saveFile(name, vm.generatedJson); };
+    vm.saveFile = saveFile;
     vm.loadFile = loadFile;
     vm.checkValue = checkValue;
     vm.resetJson = resetJson;
@@ -45,6 +46,7 @@ angular.module('jsonGenerator', [])
             fileService.loadFile(name)
                 .then(function(data) {
                     vm.generatedJson = data;
+                    vm.fileName = name;
                 }, function() {});
         }
     }
@@ -62,6 +64,11 @@ angular.module('jsonGenerator', [])
         }
         vm.selectedRowIndex = null;
 
+    }
+    
+    function saveFile(name) {
+        if(!!vm.fileName) name = vm.fileName;
+        fileService.saveFile(name, vm.generatedJson);
     }
 })
 .service('fileService', function($http, $filter){
