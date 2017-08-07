@@ -5,7 +5,10 @@ angular.module('jsonGenerator')
         restrict: 'A',
         link: function(scope, element) {
             var iElement = element[0];
-            iElement.setAttribute('style', 'height:' + (iElement.scrollHeight) + 'px;overflow-y:hidden;');
+            setTimeout(function() {
+                console.log(iElement.scrollHeight);
+                iElement.setAttribute('style', 'height:' + (iElement.scrollHeight) + 'px;overflow-y:hidden;');            
+            }, 50);
             element.on('input', function() {
                 iElement.style.height = 'auto';
                 iElement.style.height = iElement.scrollHeight + 'px';
