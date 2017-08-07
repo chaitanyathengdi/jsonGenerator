@@ -17,7 +17,7 @@
     <div ng-repeat="row in controller.generatedJson.rows">
       <div class="row">
         <div class="col-sm-4">
-          <textarea ng-model="row.key" class="text-bold" auto-resize></textarea>
+          <textarea ng-model="row.key" ng-focus="controller.selectedRowIndex = $index;" class="text-bold" auto-resize></textarea>
         </div>
         <div class="col-sm-8">
           <textarea ng-model="row.value" auto-resize></textarea>
@@ -26,7 +26,10 @@
       <hr>
     </div>
     <div class="row">
-        <div class="col-sm-4"><button ng-click="controller.addKey('Type here...', null)">Add new row</button></div>
+        <div class="col-sm-12">
+        <button ng-click="controller.addKey('Type here...', null)">Add new row</button>
+        <button ng-show="controller.selectedRowIndex !== null" ng-click="controller.deleteRow(controller.selectedRowIndex)">Delete selected row</button>
+        </div>
     </div>
     <hr>
     <button ng-click="controller.loadFile()">Load JSON</button>

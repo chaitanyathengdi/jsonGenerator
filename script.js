@@ -8,12 +8,14 @@ angular.module('jsonGenerator', [])
         title: "Sample title",
         rows: []
     };
+    vm.selectedRowIndex = null;
     vm.addKey = addKey;
     vm.saveFile = function(name){ fileService.saveFile(name, vm.generatedJson); };
     vm.loadFile = loadFile;
     vm.checkValue = checkValue;
     vm.resetJson = resetJson;
     vm.editTitle = editTitle;
+    vm.deleteRow = deleteRow;
 
     function addKey(key, value) {
         vm.generatedJson.rows.push({
@@ -52,6 +54,14 @@ angular.module('jsonGenerator', [])
             title: "Sample title",
             rows: []
         };
+    }
+
+    function deleteRow(index) {
+        if(confirm("Do you really want to delete the selected row? The row number is " + (index + 1) + ".")) {
+            vm.generatedJson.rows.splice(vm.selectedRowIndex, 1);
+        }
+        vm.selectedRowIndex = null;
+
     }
 })
 .service('fileService', function($http, $filter){
