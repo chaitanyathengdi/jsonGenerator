@@ -25,16 +25,14 @@
       </div>
       <hr>
     </div>
+    <div class="row">
+        <div class="col-sm-4"><button ng-click="controller.addKey('Type here...', null)">Add new row</button></div>
+    </div>
+    <hr>
     <button ng-click="controller.loadFile()">Load JSON</button>
     <button ng-click="controller.saveFile('generated.json')">Save JSON</button>
     <button ng-click="controller.resetJson()">Clear</button>
     <hr>
-    <h4>Add new row/Edit row</h4>
-    <form ng-submit="controller.addKey(controller.key, controller.value)">
-      <input ng-model="controller.key" placeholder="Key" ng-keyup="controller.checkValue(controller.key)">
-      <input ng-model="controller.value" placeholder="Value">
-      <button type="submit">Add Row</button>
-    </form>
     <input type="checkbox" ng-model="showJson"> Show JSON
     <pre ng-show="showJson">{{ controller.generatedJson | json }}</pre>
   </div>
