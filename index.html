@@ -17,7 +17,8 @@
     <div ng-repeat="row in controller.generatedJson.rows">
       <div class="row">
         <div class="col-sm-4">
-          <textarea ng-model="row.key" ng-focus="controller.selectedRowIndex = $index;" class="text-bold" auto-resize></textarea>
+          <textarea ng-model="row.key" class="text-bold" auto-resize
+            ng-focus="controller.selectedRowIndex = $index;" ng-blur="controller.selectedRowIndex = null;"></textarea>
         </div>
         <div class="col-sm-8">
           <textarea ng-model="row.value" auto-resize></textarea>
