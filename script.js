@@ -45,9 +45,11 @@ angular.module('jsonGenerator', [])
         if(!!name) {
             fileService.loadFile(name)
                 .then(function(data) {
-                    vm.generatedJson = data;
+                    // if load failed, reset json
+                    if(data === null) resetJson();
+                    else vm.generatedJson = data;
                     vm.fileName = name;
-                }, function() {});
+                });
         }
     }
     
@@ -85,7 +87,9 @@ angular.module('jsonGenerator', [])
                 // set title of window
                 document.title = name + " - jsonGenerator";
                 return response.data;
-            }, function() {});
+            }, function() {
+                return null;
+            });
     }
 
     this.saveFile = function(name, input) {
