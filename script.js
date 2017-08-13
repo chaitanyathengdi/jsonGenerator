@@ -82,6 +82,8 @@ angular.module('jsonGenerator', [])
         }
         return $http.get(name)
             .then(function(response) {
+                // set title of window
+                document.title = name + " - jsonGenerator";
                 return response.data;
             }, function() {});
     }
@@ -95,6 +97,8 @@ angular.module('jsonGenerator', [])
             }
             var file = new File([$filter('json')(input, 4)], fileName, {type: "application/json;charset=utf-8"});
             saveAs(file);
+            // set title of window
+            document.title = fileName + " - jsonGenerator";
             // return full fileName
             return fileName;
         }
