@@ -40,7 +40,7 @@ angular.module('jsonGenerator', [])
     }
 
     function loadFile() {
-        var name = "file";
+        var name = vm.fileName || "file";
         name = prompt("Enter name of file: ", name);
         if(!!name) {
             fileService.loadFile(name)
@@ -68,7 +68,11 @@ angular.module('jsonGenerator', [])
     
     function saveFile(name) {
         if(!!vm.fileName) name = vm.fileName;
-        fileService.saveFile(name, vm.generatedJson);
+        // if user changes name in prompt, save it
+        var returnedName = fileService.saveFile(name, vm.generatedJson);
+        // avoid overwriting name with empty/null value
+        if(!!returnedName) vm.fileName = returnedName;
+
     }
 })
 .service('fileService', function($http, $filter){
@@ -91,7 +95,11 @@ angular.module('jsonGenerator', [])
             }
             var file = new File([$filter('json')(input, 4)], fileName, {type: "application/json;charset=utf-8"});
             saveAs(file);
+            // return full fileName
+            return fileName;
         }
+        // if fileName is invalid, return nothing
+        return null;
     }
 });
 })();
