@@ -4,7 +4,7 @@ This is a webapp used to generate JSON files. It's fairly basic, I mostly use it
 This is a fairly small-scale, basic project I have been working on for the past couple of weeks. I wrote it for myself but then I thought: if someone else could use it too, why not?
 
 ### How to use
-The app gets loaded in your browser. It could theretically run by itself, but for better results use SimpleHTTPServer or something similar and work through localhost.
+The app gets loaded in your browser. It could theoretically run by itself using the index.html, but for better results use SimpleHTTPServer or something similar and work through localhost.
 
 * Adding rows is self explanatory. I have tried to keep it clean, and the delete button appears when you have focus on the left(bold) part of a row(the "key", basically), next to the New Row button.
 * Edit the title by double-clicking on it.
